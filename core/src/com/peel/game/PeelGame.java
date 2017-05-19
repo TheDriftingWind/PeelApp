@@ -1,19 +1,25 @@
 package com.peel.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.peel.game.gamemenus.MainMenu;
 
-public class PeelGame extends ApplicationAdapter {
+public class PeelGame extends Game {
+	//APP CONSTATNTS
+	public static final int V_HEIGHT = 400;
+	public static final int V_WIDTH = 240;
+	public static final String TITLE = "Peel";
+
 	SpriteBatch batch;
 	Texture img;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		setScreen(new MainMenu(this));
 	}
 
 	@Override
