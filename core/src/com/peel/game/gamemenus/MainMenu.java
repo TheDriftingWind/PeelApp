@@ -1,5 +1,7 @@
 package com.peel.game.gamemenus;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -22,6 +24,31 @@ public class MainMenu implements Screen {
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(PeelGame.V_WIDTH, PeelGame.V_HEIGHT, gameCam);
+        mainMenuScene = new MainScene(game.batch);
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //draw menu screen
+        game.batch.setProjectionMatrix(mainMenuScene.stage.getCamera().combined);
+        mainMenuScene.stage.draw();
+
+        //draw game resources
+        game.batch.setProjectionMatrix(gameCam.combined);
+        game.batch.begin();
+
+        game.batch.end();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        gamePort.update(width, height);
+    }
+
+    @Override
+    public void dispose() {
 
     }
 
@@ -42,21 +69,6 @@ public class MainMenu implements Screen {
 
     @Override
     public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void dispose() {
 
     }
 }

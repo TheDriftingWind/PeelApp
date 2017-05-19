@@ -9,12 +9,12 @@ import com.peel.game.gamemenus.MainMenu;
 
 public class PeelGame extends Game {
 	//APP CONSTATNTS
-	public static final int V_HEIGHT = 400;
-	public static final int V_WIDTH = 240;
+	public static final int V_HEIGHT = 480;
+	public static final int V_WIDTH = 800;
 	public static final String TITLE = "Peel";
 
-	SpriteBatch batch;
-	Texture img;
+	public SpriteBatch batch;
+
 	
 	@Override
 	public void create () {
@@ -24,16 +24,11 @@ public class PeelGame extends Game {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		super.render();
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 }
