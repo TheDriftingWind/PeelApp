@@ -47,21 +47,19 @@ public class MainScene {
         viewport = new FitViewport(PeelGame.V_WIDTH, PeelGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
         font = new BitmapFont();
-        skin = new Skin();
-        //Table-----------------------------------------------------------------
-        Table table = new Table();
-        table.setFillParent(true);
-        table.center();
+
         //Label-----------------------------------------------------------------
         titleLabel = new Label(PeelGame.TITLE, new Label.LabelStyle(font, Color.WHITE));
         titleLabel.setFontScale(10,7);
         //Buttons Setup-----------------------------------------------------------------
         buttonAtlas = new TextureAtlas("ui/button.pack");
+        skin = new Skin(buttonAtlas);
         textButtonStyle = new TextButton.TextButtonStyle();
-        skin.addRegions(buttonAtlas);
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("button.up");
         textButtonStyle.down = skin.getDrawable("button.down");
+        textButtonStyle.pressedOffsetX = 0;
+        textButtonStyle.pressedOffsetY = 0;
         //Buttons-----------------------------------------------------------------
         playButton = new TextButton("PLAY", textButtonStyle);
         playButton.getLabel().setFontScale(7,5);
@@ -72,15 +70,23 @@ public class MainScene {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                System.out.println("Play Button Clicked");
+                //TODO: Send player to levelsScreen
             }
         });
         settingsButton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
+                System.out.println("Settigns Button Clicked");
+                //TODO: Send player to settings screen
             }
         });
-        //TABLE-----------------------------------------------------------------
+        //Table setup-----------------------------------------------------------------
+        Table table = new Table(skin);
+        table.setFillParent(true);
+        table.center();
+        //Table-----------------------------------------------------------------
         table.add(titleLabel).expand().padTop(10);
         table.row();
         table.add(playButton).expand().padTop(10);

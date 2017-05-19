@@ -29,17 +29,20 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
+        gameCam.update();
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //draw menu screen
-        game.batch.setProjectionMatrix(mainMenuScene.stage.getCamera().combined);
-        mainMenuScene.stage.draw();
 
         //draw game resources
         game.batch.setProjectionMatrix(gameCam.combined);
         game.batch.begin();
-
         game.batch.end();
+        //draw menu screen
+        game.batch.setProjectionMatrix(mainMenuScene.stage.getCamera().combined);
+        mainMenuScene.stage.act(delta);
+        mainMenuScene.stage.draw();
+
+
     }
 
     @Override
@@ -69,6 +72,6 @@ public class MainMenu implements Screen {
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(mainMenuScene.stage);
     }
 }
