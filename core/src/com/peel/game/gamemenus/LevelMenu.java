@@ -1,4 +1,5 @@
 package com.peel.game.gamemenus;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -6,25 +7,24 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.peel.game.PeelGame;
-import com.peel.game.scenes.MainScene;
+import com.peel.game.scenes.LevelScene;
+
 
 /**
- * Created by Charles on 5/18/2017.
+ * Created by Charles on 5/19/2017.
  */
 
-public class MainMenu implements Screen {
-
-    //Setup
+public class LevelMenu implements Screen {
     private PeelGame game;
     private OrthographicCamera gameCam;
     private Viewport gamePort;
-    private MainScene mainMenuScene;
+    private LevelScene levelMenuScene;
 
-    public MainMenu(PeelGame game){
+    public LevelMenu(PeelGame game){
         this.game = game;
         gameCam = new OrthographicCamera();
         gamePort = new FitViewport(PeelGame.V_WIDTH, PeelGame.V_HEIGHT, gameCam);
-        mainMenuScene = new MainScene(game);
+        levelMenuScene = new LevelScene(game);
     }
 
     @Override
@@ -38,9 +38,9 @@ public class MainMenu implements Screen {
         game.batch.begin();
         game.batch.end();
         //draw menu screen
-        game.batch.setProjectionMatrix(mainMenuScene.stage.getCamera().combined);
-        mainMenuScene.stage.act(delta);
-        mainMenuScene.stage.draw();
+        game.batch.setProjectionMatrix(levelMenuScene.stage.getCamera().combined);
+        levelMenuScene.stage.act(delta);
+        levelMenuScene.stage.draw();
 
 
     }
@@ -72,6 +72,6 @@ public class MainMenu implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(mainMenuScene.stage);
+        Gdx.input.setInputProcessor(levelMenuScene.stage);
     }
 }

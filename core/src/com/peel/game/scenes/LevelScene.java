@@ -1,6 +1,5 @@
 package com.peel.game.scenes;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -8,50 +7,51 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.peel.game.PeelGame;
-import com.peel.game.gamemenus.LevelMenu;
 
 /**
- * Created by Charles on 5/18/2017.
+ * Created by Charles on 5/19/2017.
  */
 
-public class MainScene {
-    //Variables
+public class LevelScene {
+
+    //Setup
     public Stage stage;
     private Viewport viewport;
 
     //Labels
-    private Label titleLabel;
+    private Label levelLabel;
 
 
     //Buttons
-    private TextButton playButton, settingsButton;
-    private ImageButton aboutButton;
 
     //Buttons Setup
-    private Table buttonTable;
+    private Table textTable;
+    private Table levelsTable;
     private TextureAtlas buttonAtlas;
     private TextButton.TextButtonStyle textButtonStyle;
     private BitmapFont font;
     private Skin skin;
 
-    public MainScene(final PeelGame game){
+    public LevelScene(PeelGame game){
         //Setup-----------------------------------------------------------------
         viewport = new FitViewport(PeelGame.V_WIDTH, PeelGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, game.batch);
         font = new BitmapFont();
 
         //Label-----------------------------------------------------------------
-        titleLabel = new Label(PeelGame.TITLE, new Label.LabelStyle(font, Color.WHITE));
-        titleLabel.setFontScale(10,7);
+        levelLabel = new Label("SELECT LEVEL", new Label.LabelStyle(font, Color.WHITE));
+        levelLabel.setFontScale(5,3);
+        levelLabel.setAlignment(Align.top);
+        levelLabel.setFillParent(true);
         //Buttons Setup-----------------------------------------------------------------
         buttonAtlas = new TextureAtlas("ui/button.pack");
         skin = new Skin(buttonAtlas);
@@ -62,41 +62,14 @@ public class MainScene {
         textButtonStyle.pressedOffsetX = 0;
         textButtonStyle.pressedOffsetY = 0;
         //Buttons-----------------------------------------------------------------
-        playButton = new TextButton("PLAY", textButtonStyle);
-        playButton.getLabel().setFontScale(7,5);
-        settingsButton = new TextButton("SETTINGS", textButtonStyle);
-        settingsButton.getLabel().setFontScale(7,5);
+
         //Button Listeners------------------------------------------------------------------
-        playButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                System.out.println("Play Button Clicked");
-                //TODO: Send player to levelsScreen
-                game.setScreen(new LevelMenu(game));
-            }
-        });
-        settingsButton.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                System.out.println("Settigns Button Clicked");
-                //TODO: Send player to settings screen
-            }
-        });
+
         //Table setup-----------------------------------------------------------------
-        buttonTable = new Table(skin);
-        buttonTable.setFillParent(true);
-        buttonTable.center();
+
         //Table-----------------------------------------------------------------
-        buttonTable.add(titleLabel).expand().padTop(10);
-        buttonTable.row();
-        buttonTable.add(playButton).expand().padTop(10);
-        buttonTable.row();
-        buttonTable.add(settingsButton).expand().padTop(10);
 
         //Stage-----------------------------------------------------------------
-        stage.addActor(buttonTable);
+        stage.addActor(levelLabel);
     }
-
 }
