@@ -2,13 +2,17 @@ package com.peel.game.scenes;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -26,10 +30,11 @@ public class LevelScene {
 
     //Labels
     private Label levelLabel;
-
-
     //Buttons
-
+    private ImageButton level1button, level2button, level3button;
+    //ButtonTextures
+    private Texture[] upButtons; //up textures
+    private Texture[] downButtons; //down textures
     //Buttons Setup
     private Table levelsTable; //TODO: Add levels
     private TextureAtlas buttonAtlas;
@@ -49,23 +54,32 @@ public class LevelScene {
         levelLabel.setAlignment(Align.top);
         levelLabel.setFillParent(true);
         //Buttons Setup-----------------------------------------------------------------
-        buttonAtlas = new TextureAtlas("ui/button.pack");
-        skin = new Skin(buttonAtlas);
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("button.up");
-        textButtonStyle.down = skin.getDrawable("button.down");
-        textButtonStyle.pressedOffsetX = 0;
-        textButtonStyle.pressedOffsetY = 0;
+        //TODO: turn these into texture atlas' later to save space
+        upButtons = new Texture[3];
+        upButtons[0] = new Texture("levelbuttons/LevelButton1up.png");
+        upButtons[1] = new Texture("levelbuttons/LevelButton2up.png");
+        upButtons[2] = new Texture("levelbuttons/LevelButton3up.png");
+        downButtons = new Texture[3];
+        downButtons[0] = new Texture("levelbuttons/LevelButton1down.png");
+        downButtons[1] = new Texture("levelbuttons/LevelButton2down.png");
+        downButtons[2] = new Texture("levelbuttons/LevelButton3down.png");
         //Buttons-----------------------------------------------------------------
-
+        level1button = new ImageButton(new SpriteDrawable(new Sprite(upButtons[0])), (new SpriteDrawable(new Sprite(downButtons[0]))));
+        level2button = new ImageButton(new SpriteDrawable(new Sprite(upButtons[1])), (new SpriteDrawable(new Sprite(downButtons[1]))));
+        level3button = new ImageButton(new SpriteDrawable(new Sprite(upButtons[2])), (new SpriteDrawable(new Sprite(downButtons[2]))));
         //Button Listeners------------------------------------------------------------------
 
         //Table setup-----------------------------------------------------------------
-
+        levelsTable = new Table();
+        levelsTable.setFillParent(true);
+        levelsTable.center();
         //Table-----------------------------------------------------------------
-
+        //TODO: Figure out why rescaling isn't working
+        levelsTable.add(level1button).expandX().fillX();
+        levelsTable.add(level2button).expandX().fillX();
+        levelsTable.add(level3button).expandX().fillX();
         //Stage-----------------------------------------------------------------
         stage.addActor(levelLabel);
+        stage.addActor(levelsTable);
     }
 }
