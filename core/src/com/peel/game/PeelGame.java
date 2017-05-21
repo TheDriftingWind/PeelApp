@@ -2,7 +2,7 @@ package com.peel.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.peel.game.gamemenus.MainMenu;
+import com.peel.game.screens.MainMenu;
 
 public class PeelGame extends Game {
 	//APP CONSTATNTS

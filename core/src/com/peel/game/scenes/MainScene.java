@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.peel.game.PeelGame;
-import com.peel.game.gamemenus.LevelMenu;
+import com.peel.game.screens.LevelMenu;
 
 /**
  * Created by Charles on 5/18/2017.
