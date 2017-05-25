@@ -42,8 +42,6 @@ public class MainMenu implements Screen {
         game.batch.setProjectionMatrix(mainMenuScene.stage.getCamera().combined);
         mainMenuScene.stage.act(delta);
         mainMenuScene.stage.draw();
-
-
     }
 
     @Override

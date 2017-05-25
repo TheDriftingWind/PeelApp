@@ -2,20 +2,10 @@ package com.peel.game.scenes;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.peel.game.PeelGame;
@@ -32,17 +22,12 @@ public class HudScene {
     private Viewport viewport;
 
     //Labels
-    private Label timeLabel, levelLabel, bestLabel;
-    //Buttons
+    private Label sizeLabel, timeLabel, bestLabel;
+    private Label sizeCounter, timeCounter, bestTime;
+    private int size, time, best;
+    private Table labelTable, numbersTable;
 
-    //ButtonTextures
-
-    //Buttons Setup
-    private Table levelsTable;
-    private TextureAtlas buttonAtlas;
-    private TextButton.TextButtonStyle textButtonStyle;
     private BitmapFont font;
-    private Skin skin;
 
     public HudScene(final PeelGame game){
         //Setup-----------------------------------------------------------------
@@ -51,6 +36,12 @@ public class HudScene {
         font = new BitmapFont();
 
         //Label-----------------------------------------------------------------
+        sizeLabel = new Label("Size", new Label.LabelStyle(font, Color.WHITE));
+        timeLabel = new Label("Time", new Label.LabelStyle(font, Color.WHITE));
+        bestLabel = new Label("Best", new Label.LabelStyle(font, Color.WHITE));
+        time = 0;
+        //TODO: add best time
+        size = 40; // TODO: adjust later
 
         //Buttons Setup-----------------------------------------------------------------
 
